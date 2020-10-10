@@ -1,13 +1,13 @@
+@echo off
+
 set IDA_PRO_USER_PLUGINS=%APPDATA%\Hex-Rays\IDA Pro\plugins
-set IDA_PLG_NAME=auto_re
-del "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py"
-mklink "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py" "%~dp0\%IDA_PLG_NAME%\%IDA_PLG_NAME%.py"
-set IDA_PLG_NAME=hexrays_hlight
-del "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py"
-mklink "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py" "%~dp0\%IDA_PLG_NAME%\%IDA_PLG_NAME%.py"
-
-set IDA_PLG_NAME=batch_rename
-del "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py"
-mklink "%IDA_PRO_USER_PLUGINS%\%IDA_PLG_NAME%.py" "%~dp0\%IDA_PLG_NAME%\%IDA_PLG_NAME%.py"
-
+call :mk_soft_link auto_re
+call :mk_soft_link hexrays_hlight
+call :mk_soft_link batch_rename
+call :mk_soft_link idajmc
 pause
+
+:mk_soft_link
+del "%IDA_PRO_USER_PLUGINS%\%~1.py"
+mklink "%IDA_PRO_USER_PLUGINS%\%~1.py" "%~dp0\%~1\%~1.py"
+goto :eof
