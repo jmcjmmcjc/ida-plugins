@@ -1,3 +1,8 @@
 {
-	"editor.defaultFormatter": "vscode.python"
+	"editor.defaultFormatter": "vscode.python",
+	"editor.tabSize": 4,
+	"editor.detectIndentation": true,
+	"python.autoComplete.extraPaths": [
+		"C:/Program Files/IDA 7.0/python",
+	]
 }
