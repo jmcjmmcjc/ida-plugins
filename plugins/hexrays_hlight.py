@@ -1,27 +1,7 @@
+# -*- coding: utf-8 -*
 # highlighting plugin for Hex-Rays Decompiler
-# Copyright (c) 2016
-# Milan Bohacek <milan.bohacek+hexlight@gmail.com>
-# All rights reserved.
-# 
-# ==============================================================================
-# 
-# This file is part of Hexlight.
-# 
-# Hexlight is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# 
-# ==============================================================================
-
+__author__ = 'Joshua Muzhong Zhong'
+__version__ = '0.1'
 
 import idautils
 import idaapi
@@ -43,13 +23,13 @@ def jump(custom_viewer, line):
     idaapi.jumpto(custom_viewer, pl2, x, y)
     return oldline
 
-class hexrays_callback_info(object):
+class JmcHexraysCbInfo(object):
 
     def __init__(self):
         self.vu = None
         self.highlights = {}
         self.highl_brack = {}
-        self.hicolor = 0x646464  # 0xF2E8BF #0x00ffff00
+        self.hicolor = 0xffff00 #0x646464  # 0xF2E8BF #0x00ffff00
         self.theotherline = None
         self.safe = False
         return
@@ -302,22 +282,22 @@ class HexHLightPlugin_t(idaapi.plugin_t):
     wanted_hotkey = ""
 
     def init(self):
-        # Some initialization
         global hexlight_cb_info, hexlight_cb
 
         if idaapi.init_hexrays_plugin():
-            hexlight_cb_info = hexrays_callback_info()
+            hexlight_cb_info = JmcHexraysCbInfo()
             hexlight_cb = hexlight_cb_info.event_callback
             if not idaapi.install_hexrays_callback(hexlight_cb):
             #    print "could not install hexrays_callback"
                 return idaapi.PLUGIN_SKIP
-            print "Hexlight plugin installed Mod by Snow"
+
+            print "[JmcPlg]Hexlight plugin enabled!"
             addon = idaapi.addon_info_t()
-            addon.id = "milan.bohacek.hexlight"
-            addon.name = "Hexlight"
-            addon.producer = "Milan Bohacek"
-            addon.url = "milan.bohacek+hexlight@gmail.com"
-            addon.version = "6.95"
+            addon.id = "jmc.hexlight"
+            addon.name = "JmcHexlight"
+            addon.producer = "Joshua Muzhong Zhong"
+            addon.url = "zhongmuzhong@gmail.com"
+            addon.version = "0.1"
             idaapi.register_addon(addon)
             return idaapi.PLUGIN_KEEP
         #print "init_hexrays_plugin failed"
