@@ -45,3 +45,25 @@ def find_and_rename_func_prefix(prefix="", new_prefix=""):
             new_func_name = func_name.replace(prefix, new_prefix)
             print("%s, %s -> %s" %(hex(ea), func_name, new_func_name))
             idaapi.set_name(ea, new_func_name, idaapi.SN_CHECK)
+
+class IdaJmc(idaapi.plugin_t):
+    flags = idaapi.PLUGIN_UNL
+    comment = "IdaJmc Lib"
+
+    help = ""
+    wanted_name = "IdaJmc"
+    wanted_hotkey=""
+
+    def init(self):
+        return idaapi.PLUGIN_SKIP
+
+
+    def run(self, arg):
+        return
+
+    def term(self):
+        return
+
+# noinspection PyPep8Naming
+def PLUGIN_ENTRY():
+    return IdaJmc()
